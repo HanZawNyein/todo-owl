@@ -1,5 +1,4 @@
-import {Component, onMounted, useRef, useState, xml} from "@odoo/owl";
-import {useStore} from "../Store";
+import {Component, xml} from "@odoo/owl";
 // -------------------------------------------------------------------------
 // Root Component
 // -------------------------------------------------------------------------

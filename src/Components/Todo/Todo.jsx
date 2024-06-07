@@ -36,7 +36,7 @@ export default class Todo extends Component {
         </div>
 </div>`;
 
-    static components = {Task,Navbar};
+    static components = {Task, Navbar};
 
     get displayedTasks() {
         const tasks = this.store.tasks;

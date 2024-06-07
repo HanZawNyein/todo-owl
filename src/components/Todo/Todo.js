@@ -42,7 +42,7 @@ export class Todo extends Component {
         console.log("add")
         this.state.tasks.push({
             'id': this.state.tasks.length + 1,
-            'title': `${this.state.tasks.length+1}. New Title`,
+            'title': `${this.state.tasks.length + 1}. New Title`,
             'text': 'new text',
             'isCompleted': false,
         })

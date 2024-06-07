@@ -7,7 +7,7 @@ import Navbar from "../Navbar/Navbar";
 // -------------------------------------------------------------------------
 export default class Todo extends Component {
     static template = xml/* xml */`
-<div class="container m-2">
+<div class="container m-5">
         <input placeholder="Enter a new task" t-on-keyup="addTask" t-ref="add-input" class="form-control"/>
         <div class="container mt-3">
                <div class="task-panel" t-if="store.tasks.length">

@@ -8,41 +8,33 @@ import Navbar from "../Navbar/Navbar";
 export default class Todo extends Component {
     static template = xml/* xml */`
 <div class="container m-2">
-        <input placeholder="Enter a new task" t-on-keyup="addTask" t-ref="add-input"
-        class="form-control"/>
-        <div class="mt-3">
-            <div class="row row-cols-1 row-cols-md-3 g-4">
-              <t t-foreach="displayedTasks" t-as="task" t-key="task.id">
-                          <Task task="task"/>
-              </t>
-        </div>
-</div>
-
-</div>
-      <div class="todo-app">
-<!--        <input placeholder="Enter a new task" t-on-keyup="addTask" t-ref="add-input"/>-->
-        <div class="task-list">
-          <t t-foreach="displayedTasks" t-as="task" t-key="task.id">
-            <Task task="task"/>
-          </t>
-        </div>
-        <div class="task-panel" t-if="store.tasks.length">
-          <div class="task-counter">
+        <input placeholder="Enter a new task" t-on-keyup="addTask" t-ref="add-input" class="form-control"/>
+        <div class="container mt-3">
+               <div class="task-panel" t-if="store.tasks.length">
+          <h5 class="task-counter">
             <t t-esc="displayedTasks.length"/>
             <t t-if="displayedTasks.length lt store.tasks.length">
                 / <t t-esc="store.tasks.length"/>
             </t>
             task(s)
-          </div>
-          <div>
+          </h5>
+          <h5>
             <span t-foreach="['all', 'active', 'completed']"
               t-as="f" t-key="f"
               t-att-class="{active: filter.value===f}"
               t-on-click="() => this.setFilter(f)"
               t-esc="f"/>
-          </div>
+          </h5>
         </div>
-      </div>`;
+        </div>
+        <div class="mt-3">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+              <t t-foreach="displayedTasks" t-as="task" t-key="task.id">
+                          <Task task="task"/>
+              </t>
+            </div>
+        </div>
+</div>`;
 
     static components = {Task,Navbar};
 

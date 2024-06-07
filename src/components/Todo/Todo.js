@@ -7,9 +7,9 @@ export class Todo extends Component {
                 <h1>Tasks</h1>
                 <hr/>
                 <ui>
-                    <li><b>all</b> - <t t-esc="props.tasks.length"/></li>
-                    <li><b>Completed</b> - <t t-esc="props.tasks.filter(task=>task.isCompleted).length"/></li>
-                    <li><b>Uncompleted</b> - <t t-esc="props.tasks.filter(task=>!task.isCompleted).length"/></li>
+                    <li><b>all</b> - <t t-esc="state.tasks.length"/></li>
+                    <li><b>Completed</b> - <t t-esc="state.tasks.filter(task=>task.isCompleted).length"/></li>
+                    <li><b>Uncompleted</b> - <t t-esc="state.tasks.filter(task=>!task.isCompleted).length"/></li>
                 </ui>
         </div>
         <hr/>
@@ -26,25 +26,51 @@ export class Todo extends Component {
         </div>`;
 
     static components = {Task};
-    static props = ["tasks"];
-
     inputRef = useRef('search-input');
 
-    state = useState({tasks: this.props.tasks});
+    setup(){
+        this.state = useState({
+            tasks:[]
+        });
+        this.loadTodos();
+    }
+
+
+    async loadTodos() {
+        const savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        this.state.tasks = savedTasks;
+    }
 
 
     searchTodos() {
         var searchText = this.inputRef.el.value
-        this.state.tasks = this.props.tasks.filter((task) => task.text.toLowerCase().includes(searchText))
+        const savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        this.state.tasks = savedTasks.filter((task) => task.text.toLowerCase().includes(searchText))
     }
 
     addTodo() {
         console.log("add")
-        this.state.tasks.push({
+        var task = {
             'id': this.state.tasks.length + 1,
             'title': `${this.state.tasks.length + 1}. New Title`,
             'text': 'new text',
             'isCompleted': false,
-        })
+        }
+        this.state.tasks.push(task)
+        this.saveTodos()
+    }
+
+    updateTodo(task) {
+        console.log(task)
+        // const updatedTask = event.detail;
+        // const taskIndex = this.state.tasks.findIndex(task => task.id === updatedTask.id);
+        // if (taskIndex !== -1) {
+        //     this.state.tasks[taskIndex] = updatedTask;
+        //     this.saveTodos();
+        // }
+    }
+
+    saveTodos() {
+        localStorage.setItem('tasks', JSON.stringify(this.state.tasks));
     }
 }

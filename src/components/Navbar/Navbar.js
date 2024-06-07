@@ -10,7 +10,4 @@ export default class Navbar extends Component {
     </button>
   </div>
 </nav>`;
-
-    static props = ["tasks"];
-    state = useState({tasks: this.props.tasks});
 }

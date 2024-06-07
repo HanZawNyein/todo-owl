@@ -1,11 +1,13 @@
 import {Component, onMounted, useRef, useState, xml} from "@odoo/owl";
 import {Task} from "./Task";
 import {useStore} from "../Store";
+import Navbar from "../Navbar/Navbar";
 // -------------------------------------------------------------------------
 // Root Component
 // -------------------------------------------------------------------------
 export default class Root extends Component {
     static template = xml/* xml */`
+<Navbar/>
       <div class="todo-app">
         <input placeholder="Enter a new task" t-on-keyup="addTask" t-ref="add-input"/>
         <div class="task-list">
@@ -31,7 +33,7 @@ export default class Root extends Component {
         </div>
       </div>`;
 
-    static components = {Task};
+    static components = {Task,Navbar};
 
     get displayedTasks() {
         const tasks = this.store.tasks;

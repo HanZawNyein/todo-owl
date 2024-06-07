@@ -61,7 +61,5 @@ export default class Todo extends Component {
         }
     }
 
-    setFilter(filter) {
-        this.filter.value = filter;
-    }
+
 }

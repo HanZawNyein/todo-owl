@@ -7,8 +7,20 @@ import Navbar from "../Navbar/Navbar";
 // -------------------------------------------------------------------------
 export default class Todo extends Component {
     static template = xml/* xml */`
+<div class="container m-2">
+        <input placeholder="Enter a new task" t-on-keyup="addTask" t-ref="add-input"
+        class="form-control"/>
+        <div class="mt-3">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+              <t t-foreach="displayedTasks" t-as="task" t-key="task.id">
+                          <Task task="task"/>
+              </t>
+        </div>
+</div>
+
+</div>
       <div class="todo-app">
-        <input placeholder="Enter a new task" t-on-keyup="addTask" t-ref="add-input"/>
+<!--        <input placeholder="Enter a new task" t-on-keyup="addTask" t-ref="add-input"/>-->
         <div class="task-list">
           <t t-foreach="displayedTasks" t-as="task" t-key="task.id">
             <Task task="task"/>
@@ -61,5 +73,7 @@ export default class Todo extends Component {
         }
     }
 
-
+    setFilter(filter) {
+        this.filter.value = filter;
+    }
 }

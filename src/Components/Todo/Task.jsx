@@ -7,14 +7,23 @@ import {useStore} from "../Store";
 // -------------------------------------------------------------------------
 export class Task extends Component {
     static template = xml/* xml */`
-      <div class="task" t-att-class="props.task.isCompleted ? 'done' : ''">
-        <input type="checkbox"
-          t-att-id="props.task.id"
-          t-att-checked="props.task.isCompleted"
-          t-on-click="() => store.toggleTask(props.task)"/>
-        <label t-att-for="props.task.id"><t t-esc="props.task.text"/></label>
-        <span class="delete" t-on-click="() => store.deleteTask(props.task)">🗑</span>
-      </div>`;
+        <div class="col">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title"><t t-esc="props.task.text"/></h5>
+                <p class="card-text">
+                    <t t-esc="props.task.text"/>  
+                </p>
+              </div>
+              <div class="card-footer">
+                    <input type="checkbox"
+                      t-att-id="props.task.id"
+                      t-att-checked="props.task.isCompleted"
+                      t-on-click="() => store.toggleTask(props.task)"/>
+                      <button class="btn btn-outline-danger" t-on-click="() => store.deleteTask(props.task)">🗑</button>
+                </div>
+            </div>
+        </div>`;
 
     static props = ["task"];
 

@@ -9,21 +9,22 @@ export default class Todo extends Component {
     static template = xml/* xml */`
 <div class="container m-5">
         <input placeholder="Enter a new task" t-on-keyup="addTask" t-ref="add-input" class="form-control"/>
-        <div class="container mt-3">
-               <div class="task-panel" t-if="store.tasks.length">
-          <h5 class="task-counter">
+        <div class="mt-5">
+               <div style="color: navy;
+            margin-top: 8px;
+            font-size: 14px;
+            display: flex;" t-if="store.tasks.length">
+          <h2 style="flex-grow: 1;">
             <t t-esc="displayedTasks.length"/>
             <t t-if="displayedTasks.length lt store.tasks.length">
                 / <t t-esc="store.tasks.length"/>
             </t>
             task(s)
-          </h5>
+          </h2>
           <h5>
-            <span t-foreach="['all', 'active', 'completed']"
-              t-as="f" t-key="f"
-              t-att-class="{active: filter.value===f}"
-              t-on-click="() => this.setFilter(f)"
-              t-esc="f"/>
+            <span t-foreach="['all', 'active', 'completed']"  t-as="f" t-key="f">
+                <button t-on-click="() => this.setFilter(f)" class="btn btn-outline-primary m-2"><t t-esc="f" /></button> 
+            </span>
           </h5>
         </div>
         </div>

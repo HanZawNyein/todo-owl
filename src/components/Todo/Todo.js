@@ -45,7 +45,7 @@ export class Todo extends Component {
     searchTodos() {
         var searchText = this.inputRef.el.value
         const savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
-        this.state.tasks = savedTasks.filter((task) => task.text.toLowerCase().includes(searchText))
+        this.state.tasks = savedTasks.filter((task) => task.title.toLowerCase().includes(searchText))
     }
 
     addTodo() {
@@ -58,16 +58,6 @@ export class Todo extends Component {
         }
         this.state.tasks.push(task)
         this.saveTodos()
-    }
-
-    updateTodo(task) {
-        console.log(task)
-        // const updatedTask = event.detail;
-        // const taskIndex = this.state.tasks.findIndex(task => task.id === updatedTask.id);
-        // if (taskIndex !== -1) {
-        //     this.state.tasks[taskIndex] = updatedTask;
-        //     this.saveTodos();
-        // }
     }
 
     saveTodos() {

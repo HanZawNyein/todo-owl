@@ -5,7 +5,7 @@ import Navbar from "./Navbar/Navbar";
 export class Root extends Component {
     static template = xml`
     <Navbar/>
-    <div class="container mt-5">
+    <div class="container mt-2">
       <Todo/>
     </div>`;
 

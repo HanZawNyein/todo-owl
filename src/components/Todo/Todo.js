@@ -4,26 +4,41 @@ import Task from "./Task";
 export class Todo extends Component {
     static template = xml`
         <div class="container">
-                <h1>Tasks</h1>
-                <hr/>
-                <ui>
-                    <li><b>all</b> - <t t-esc="state.tasks.length"/></li>
-                    <li><b>Completed</b> - <t t-esc="state.tasks.filter(task=>task.isCompleted).length"/></li>
-                    <li><b>Uncompleted</b> - <t t-esc="state.tasks.filter(task=>!task.isCompleted).length"/></li>
-                </ui>
+            <h1>Tasks</h1>
+            <hr/>
+            <ui>
+                <li><b>all</b> - <t t-esc="state.tasks.length"/></li>
+                <li><b>Completed</b> - <t t-esc="state.tasks.filter(task=>task.isCompleted).length"/></li>
+                <li><b>Uncompleted</b> - <t t-esc="state.tasks.filter(task=>!task.isCompleted).length"/></li>
+            </ui>
         </div>
         <hr/>
-        <div class="d-flex m-5">
+        <div class="d-flex mb-2">
             <input class="form-control me-2" t-ref="search-input" type="search" placeholder="Search" aria-label="Search" 
             t-on-keyup="searchTodos"/>
             <button class="btn btn-primary" t-on-click="addTodo">AddTodos</button>
         </div>
-        
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-          <t t-foreach="state.tasks" t-as="task" t-key="task.id">
-              <Task task="task"/>
-          </t>
-        </div>`;
+        <div class="scrolable-tasks" style="max-height: 60vh; /* Adjust the height as needed */
+            overflow-y: auto;
+            padding: 1rem; /* Optional: Add padding if needed */
+            border: 1px solid #ddd; /* Optional: Add a border to distinguish the scrollable area */">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+              <t t-foreach="state.tasks" t-as="task" t-key="task.id">
+                  <Task task="task"/>
+              </t>
+            </div>
+        </div>
+        `;
+
+    static style = `
+        .scrollable-tasks {
+            max-height: 400px; /* Adjust the height as needed */
+            overflow-y: auto;
+            padding: 1rem; /* Optional: Add padding if needed */
+            border: 1px solid #ddd; /* Optional: Add a border to distinguish the scrollable area */
+        }
+    `;
+
 
     static components = {Task};
     inputRef = useRef('search-input');

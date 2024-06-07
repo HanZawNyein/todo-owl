@@ -5,11 +5,11 @@ import Navbar from "../Navbar/Navbar";
 // Root Component
 // -------------------------------------------------------------------------
 export default class Root extends Component {
-    static template = xml/* xml */`
-    <div>
-        <Navbar/>
-        <Todo/>
-    </div>`;
+    static template = xml/* xml */
+        `<div>
+            <Navbar/>
+            <Todo/>
+        </div>`;
 
-    static components = {Navbar,Todo};
+    static components = {Navbar, Todo};
 }

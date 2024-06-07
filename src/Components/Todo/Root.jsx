@@ -1,10 +1,10 @@
-import {Component, mount, onMounted, reactive, useEnv, useRef, useState, xml} from "@odoo/owl";
+import {Component, onMounted, useRef, useState, xml} from "@odoo/owl";
 import {Task} from "./Task";
 import {useStore} from "../Store";
 // -------------------------------------------------------------------------
 // Root Component
 // -------------------------------------------------------------------------
-export default  class Root extends Component {
+export default class Root extends Component {
     static template = xml/* xml */`
       <div class="todo-app">
         <input placeholder="Enter a new task" t-on-keyup="addTask" t-ref="add-input"/>
@@ -33,6 +33,18 @@ export default  class Root extends Component {
 
     static components = {Task};
 
+    get displayedTasks() {
+        const tasks = this.store.tasks;
+        switch (this.filter.value) {
+            case "active":
+                return tasks.filter((t) => !t.isCompleted);
+            case "completed":
+                return tasks.filter((t) => t.isCompleted);
+            case "all":
+                return tasks;
+        }
+    }
+
     setup() {
         const inputRef = useRef("add-input");
         onMounted(() => inputRef.el.focus());
@@ -45,18 +57,6 @@ export default  class Root extends Component {
         if (ev.keyCode === 13) {
             this.store.addTask(ev.target.value);
             ev.target.value = "";
-        }
-    }
-
-    get displayedTasks() {
-        const tasks = this.store.tasks;
-        switch (this.filter.value) {
-            case "active":
-                return tasks.filter((t) => !t.isCompleted);
-            case "completed":
-                return tasks.filter((t) => t.isCompleted);
-            case "all":
-                return tasks;
         }
     }
 

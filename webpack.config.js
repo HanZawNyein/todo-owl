@@ -7,9 +7,9 @@ module.exports = function (env, argv) {
     const mode = argv.mode || "development";
     return {
         mode: mode,
-        entry: "./src/main.js",
+        entry: "./src/index.js",
         output: {
-            filename: "main.js",
+            filename: "index.js",
             path: path.resolve(__dirname, "dist"),
         },
         module: {

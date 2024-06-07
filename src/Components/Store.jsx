@@ -1,4 +1,4 @@
-import {Component, mount, onMounted, reactive, useEnv, useRef, useState, xml} from "@odoo/owl";
+import {useEnv, useState} from "@odoo/owl";
 
 // -------------------------------------------------------------------------
 // Store
